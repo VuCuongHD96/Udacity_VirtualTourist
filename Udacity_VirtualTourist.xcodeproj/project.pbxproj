@@ -7,18 +7,58 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		962CD1912BF7A78900415511 /* Udacity_VirtualTouristApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CD1902BF7A78900415511 /* Udacity_VirtualTouristApp.swift */; };
 		962CD1932BF7A78900415511 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CD1922BF7A78900415511 /* ContentView.swift */; };
 		962CD1952BF7A78B00415511 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 962CD1942BF7A78B00415511 /* Assets.xcassets */; };
 		962CD1982BF7A78B00415511 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 962CD1972BF7A78B00415511 /* Preview Assets.xcassets */; };
+		962CD1A72BF7A94100415511 /* ActivityTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CD19E2BF7A94100415511 /* ActivityTracker.swift */; };
+		962CD1A82BF7A94100415511 /* CancelBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CD19F2BF7A94100415511 /* CancelBag.swift */; };
+		962CD1A92BF7A94100415511 /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CD1A02BF7A94100415511 /* Driver.swift */; };
+		962CD1AA2BF7A94100415511 /* ErrorTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CD1A12BF7A94100415511 /* ErrorTracker.swift */; };
+		962CD1AB2BF7A94100415511 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CD1A22BF7A94100415511 /* Observable.swift */; };
+		962CD1AD2BF7A94100415511 /* Publisher+Unwrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CD1A42BF7A94100415511 /* Publisher+Unwrap.swift */; };
+		962CD1AE2BF7A94100415511 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CD1A52BF7A94100415511 /* ViewModel.swift */; };
+		962CD1B42BF7A98A00415511 /* AlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CD1AF2BF7A98A00415511 /* AlertMessage.swift */; };
+		962CD1B52BF7A98A00415511 /* DictionaryPrinter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CD1B02BF7A98A00415511 /* DictionaryPrinter.swift */; };
+		962CD1B72BF7A98A00415511 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CD1B22BF7A98A00415511 /* Screen.swift */; };
+		962CD1D22BF7A9AB00415511 /* BaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CD1B82BF7A9AB00415511 /* BaseError.swift */; };
+		962CD1D32BF7A9AB00415511 /* DecodingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CD1B92BF7A9AB00415511 /* DecodingError.swift */; };
+		962CD1D42BF7A9AB00415511 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CD1BB2BF7A9AB00415511 /* HTTPMethod.swift */; };
+		962CD1D52BF7A9AB00415511 /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CD1BC2BF7A9AB00415511 /* HTTPStatusCode.swift */; };
+		962CD1D62BF7A9AB00415511 /* ServiceBaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CD1BD2BF7A9AB00415511 /* ServiceBaseRepository.swift */; };
+		962CD1D72BF7A9AB00415511 /* ServiceBaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CD1BE2BF7A9AB00415511 /* ServiceBaseRequest.swift */; };
+		962CD1D82BF7A9AB00415511 /* URLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CD1BF2BF7A9AB00415511 /* URLs.swift */; };
+		962CD1E42BF7A9AB00415511 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CD1CF2BF7A9AB00415511 /* APIService.swift */; };
+		962CD1E92BF7AA0400415511 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CD1E52BF7AA0400415511 /* AppDelegate.swift */; };
+		962CD1EA2BF7AA0400415511 /* AppNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CD1E62BF7AA0400415511 /* AppNavigator.swift */; };
+		962CD1EB2BF7AA0400415511 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CD1E72BF7AA0400415511 /* AppViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		962CD18D2BF7A78900415511 /* Udacity_VirtualTourist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Udacity_VirtualTourist.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		962CD1902BF7A78900415511 /* Udacity_VirtualTouristApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Udacity_VirtualTouristApp.swift; sourceTree = "<group>"; };
 		962CD1922BF7A78900415511 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		962CD1942BF7A78B00415511 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		962CD1972BF7A78B00415511 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		962CD19E2BF7A94100415511 /* ActivityTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTracker.swift; sourceTree = "<group>"; };
+		962CD19F2BF7A94100415511 /* CancelBag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CancelBag.swift; sourceTree = "<group>"; };
+		962CD1A02BF7A94100415511 /* Driver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Driver.swift; sourceTree = "<group>"; };
+		962CD1A12BF7A94100415511 /* ErrorTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorTracker.swift; sourceTree = "<group>"; };
+		962CD1A22BF7A94100415511 /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		962CD1A42BF7A94100415511 /* Publisher+Unwrap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Publisher+Unwrap.swift"; sourceTree = "<group>"; };
+		962CD1A52BF7A94100415511 /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		962CD1AF2BF7A98A00415511 /* AlertMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertMessage.swift; sourceTree = "<group>"; };
+		962CD1B02BF7A98A00415511 /* DictionaryPrinter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryPrinter.swift; sourceTree = "<group>"; };
+		962CD1B22BF7A98A00415511 /* Screen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
+		962CD1B82BF7A9AB00415511 /* BaseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseError.swift; sourceTree = "<group>"; };
+		962CD1B92BF7A9AB00415511 /* DecodingError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecodingError.swift; sourceTree = "<group>"; };
+		962CD1BB2BF7A9AB00415511 /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		962CD1BC2BF7A9AB00415511 /* HTTPStatusCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
+		962CD1BD2BF7A9AB00415511 /* ServiceBaseRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceBaseRepository.swift; sourceTree = "<group>"; };
+		962CD1BE2BF7A9AB00415511 /* ServiceBaseRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceBaseRequest.swift; sourceTree = "<group>"; };
+		962CD1BF2BF7A9AB00415511 /* URLs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLs.swift; sourceTree = "<group>"; };
+		962CD1CF2BF7A9AB00415511 /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		962CD1E52BF7AA0400415511 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		962CD1E62BF7AA0400415511 /* AppNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppNavigator.swift; sourceTree = "<group>"; };
+		962CD1E72BF7AA0400415511 /* AppViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,7 +91,10 @@
 		962CD18F2BF7A78900415511 /* Udacity_VirtualTourist */ = {
 			isa = PBXGroup;
 			children = (
-				962CD1902BF7A78900415511 /* Udacity_VirtualTouristApp.swift */,
+				962CD1EC2BF7AA0600415511 /* Application */,
+				962CD1D12BF7A9AB00415511 /* Platform */,
+				962CD1B32BF7A98A00415511 /* Util */,
+				962CD1A62BF7A94100415511 /* Architecture */,
 				962CD1922BF7A78900415511 /* ContentView.swift */,
 				962CD1942BF7A78B00415511 /* Assets.xcassets */,
 				962CD1962BF7A78B00415511 /* Preview Content */,
@@ -65,6 +108,111 @@
 				962CD1972BF7A78B00415511 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		962CD1A62BF7A94100415511 /* Architecture */ = {
+			isa = PBXGroup;
+			children = (
+				962CD19E2BF7A94100415511 /* ActivityTracker.swift */,
+				962CD19F2BF7A94100415511 /* CancelBag.swift */,
+				962CD1A02BF7A94100415511 /* Driver.swift */,
+				962CD1A12BF7A94100415511 /* ErrorTracker.swift */,
+				962CD1A22BF7A94100415511 /* Observable.swift */,
+				962CD1A42BF7A94100415511 /* Publisher+Unwrap.swift */,
+				962CD1A52BF7A94100415511 /* ViewModel.swift */,
+			);
+			path = Architecture;
+			sourceTree = "<group>";
+		};
+		962CD1B32BF7A98A00415511 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				962CD1AF2BF7A98A00415511 /* AlertMessage.swift */,
+				962CD1B02BF7A98A00415511 /* DictionaryPrinter.swift */,
+				962CD1B22BF7A98A00415511 /* Screen.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		962CD1BA2BF7A9AB00415511 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				962CD1B82BF7A9AB00415511 /* BaseError.swift */,
+				962CD1B92BF7A9AB00415511 /* DecodingError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		962CD1C02BF7A9AB00415511 /* Middleware */ = {
+			isa = PBXGroup;
+			children = (
+				962CD1BB2BF7A9AB00415511 /* HTTPMethod.swift */,
+				962CD1BC2BF7A9AB00415511 /* HTTPStatusCode.swift */,
+				962CD1BD2BF7A9AB00415511 /* ServiceBaseRepository.swift */,
+				962CD1BE2BF7A9AB00415511 /* ServiceBaseRequest.swift */,
+				962CD1BF2BF7A9AB00415511 /* URLs.swift */,
+			);
+			path = Middleware;
+			sourceTree = "<group>";
+		};
+		962CD1C32BF7A9AB00415511 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		962CD1C82BF7A9AB00415511 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		962CD1CE2BF7A9AB00415511 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		962CD1D02BF7A9AB00415511 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				962CD1CF2BF7A9AB00415511 /* APIService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		962CD1D12BF7A9AB00415511 /* Platform */ = {
+			isa = PBXGroup;
+			children = (
+				962CD1BA2BF7A9AB00415511 /* Error */,
+				962CD1C02BF7A9AB00415511 /* Middleware */,
+				962CD1C32BF7A9AB00415511 /* Repository */,
+				962CD1C82BF7A9AB00415511 /* Request */,
+				962CD1CE2BF7A9AB00415511 /* Response */,
+				962CD1D02BF7A9AB00415511 /* Service */,
+			);
+			path = Platform;
+			sourceTree = "<group>";
+		};
+		962CD1E82BF7AA0400415511 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				962CD1E52BF7AA0400415511 /* AppDelegate.swift */,
+				962CD1E62BF7AA0400415511 /* AppNavigator.swift */,
+				962CD1E72BF7AA0400415511 /* AppViewModel.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		962CD1EC2BF7AA0600415511 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				962CD1E82BF7AA0400415511 /* App */,
+			);
+			path = Application;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +285,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				962CD1AE2BF7A94100415511 /* ViewModel.swift in Sources */,
+				962CD1A92BF7A94100415511 /* Driver.swift in Sources */,
+				962CD1EB2BF7AA0400415511 /* AppViewModel.swift in Sources */,
+				962CD1AA2BF7A94100415511 /* ErrorTracker.swift in Sources */,
+				962CD1E42BF7A9AB00415511 /* APIService.swift in Sources */,
 				962CD1932BF7A78900415511 /* ContentView.swift in Sources */,
-				962CD1912BF7A78900415511 /* Udacity_VirtualTouristApp.swift in Sources */,
+				962CD1D22BF7A9AB00415511 /* BaseError.swift in Sources */,
+				962CD1D32BF7A9AB00415511 /* DecodingError.swift in Sources */,
+				962CD1D52BF7A9AB00415511 /* HTTPStatusCode.swift in Sources */,
+				962CD1B52BF7A98A00415511 /* DictionaryPrinter.swift in Sources */,
+				962CD1B42BF7A98A00415511 /* AlertMessage.swift in Sources */,
+				962CD1AB2BF7A94100415511 /* Observable.swift in Sources */,
+				962CD1D82BF7A9AB00415511 /* URLs.swift in Sources */,
+				962CD1B72BF7A98A00415511 /* Screen.swift in Sources */,
+				962CD1D62BF7A9AB00415511 /* ServiceBaseRepository.swift in Sources */,
+				962CD1D72BF7A9AB00415511 /* ServiceBaseRequest.swift in Sources */,
+				962CD1EA2BF7AA0400415511 /* AppNavigator.swift in Sources */,
+				962CD1AD2BF7A94100415511 /* Publisher+Unwrap.swift in Sources */,
+				962CD1D42BF7A9AB00415511 /* HTTPMethod.swift in Sources */,
+				962CD1A82BF7A94100415511 /* CancelBag.swift in Sources */,
+				962CD1E92BF7AA0400415511 /* AppDelegate.swift in Sources */,
+				962CD1A72BF7A94100415511 /* ActivityTracker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,7 +443,6 @@
 				DEVELOPMENT_TEAM = GCAT449K7M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -304,7 +471,6 @@
 				DEVELOPMENT_TEAM = GCAT449K7M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
