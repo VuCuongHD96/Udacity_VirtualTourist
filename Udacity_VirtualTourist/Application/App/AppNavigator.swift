@@ -18,8 +18,8 @@ struct AppNavigator: AppNavigatorType {
     
     func toMainView() {
         let navigationController = UINavigationController()
-        let contentView = ContentView()
-        let viewController = UIHostingController(rootView: contentView)
+        let homeView = HomeView()
+        let viewController = UIHostingController(rootView: homeView)
         navigationController.viewControllers = [viewController]
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
