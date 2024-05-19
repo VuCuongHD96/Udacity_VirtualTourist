@@ -42,11 +42,6 @@ struct APIService {
                     throw BaseError.redirectionError
                 }
                 if statusCode == 200 {
-                    if input.urlString.contains(URLs.login) || input.urlString.contains(URLs.userInfo) {
-                        let range = 5..<data.count
-                        let newData = data.subdata(in: range)
-                        return newData
-                    }
                     print("\n------------RESPONSE OUTPUT")
                     DictionaryPrinter.printBeauty(data: data)
                     print("------------END RESPONSE OUTPUT")
