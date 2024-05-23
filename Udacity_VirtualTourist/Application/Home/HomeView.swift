@@ -9,7 +9,6 @@ import SwiftUI
 import MapKit
 
 struct PinItemViewData: Identifiable {
-    
     let id = UUID().uuidString
     let coordinate: CLLocationCoordinate2D
     var latitude: CLLocationDegrees {
@@ -22,44 +21,44 @@ struct PinItemViewData: Identifiable {
 
 struct HomeView: View {
     
-    @State private var pinItemViewArray: [PinItemViewData] = []
-    let startPosition = MapCameraPosition.region(
-        MKCoordinateRegion(
-            center: CLLocationCoordinate2D(latitude: 56, longitude: -3),
-            span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10)
-        )
-    )
+    var input: HomeViewModel.Input
+    @ObservedObject var output: HomeViewModel.Output
+    let cancelBag = CancelBag()
+    
+    init(viewModel: HomeViewModel) {
+        let input = HomeViewModel.Input()
+        output = viewModel.transform(input, cancelBag: cancelBag)
+        self.input = input
+    }
     
     var body: some View {
+        let mapCameraPosition = MapCameraPosition.region(output.region)
         MapReader { proxy in
-            Map(initialPosition: startPosition) {
-                ForEach(pinItemViewArray) { location in
-                    Annotation("location.name", coordinate: location.coordinate) {
+            Map(initialPosition: mapCameraPosition) {
+                ForEach(output.pinItemViewArray, id: \.id) { pinItem in
+                    Annotation("location.name", coordinate: pinItem.coordinate) {
                         Image(systemName: "star.circle")
-                            .resizable()
                             .foregroundStyle(.yellow)
                             .frame(width: 40, height: 40)
                             .background(.white)
                             .clipShape(.circle)
                             .onTapGesture {
-                                print("--- debug --- tap on Annotation Image")
+                                input.annotationAction.send(pinItem)
                             }
                     }
                 }
             }
             .onTapGesture { position in
-                
                 if let coordinate = proxy.convert(position, from: .local) {
-                    print("--- debug --- tap on Map coordinate = ", coordinate)
-                    let pinItemViewData = PinItemViewData(coordinate: coordinate)
-                    pinItemViewArray.append(pinItemViewData)
+                    input.pinLocation.send(coordinate)
                 }
             }
+            .ignoresSafeArea()
         }
-        .ignoresSafeArea()
     }
 }
 
 #Preview {
-    HomeView()
+    let homeViewModel = HomeViewModel()
+    return HomeView(viewModel: homeViewModel)
 }
