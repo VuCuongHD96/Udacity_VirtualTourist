@@ -18,7 +18,9 @@ struct AppNavigator: AppNavigatorType {
     
     func toMainView() {
         let navigationController = UINavigationController()
-        let homeView = HomeView()
+        navigationController.navigationBar.isHidden = true
+        let homeViewModel = HomeViewModel()
+        let homeView = HomeView(viewModel: homeViewModel)
         let viewController = UIHostingController(rootView: homeView)
         navigationController.viewControllers = [viewController]
         window.rootViewController = navigationController
