@@ -31,6 +31,7 @@
 		962CD1E92BF7AA0400415511 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CD1E52BF7AA0400415511 /* AppDelegate.swift */; };
 		962CD1EA2BF7AA0400415511 /* AppNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CD1E62BF7AA0400415511 /* AppNavigator.swift */; };
 		962CD1EB2BF7AA0400415511 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CD1E72BF7AA0400415511 /* AppViewModel.swift */; };
+		968CCF862BFA0B370084F805 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968CCF852BFA0B370084F805 /* HomeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,7 @@
 		962CD1E52BF7AA0400415511 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		962CD1E62BF7AA0400415511 /* AppNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppNavigator.swift; sourceTree = "<group>"; };
 		962CD1E72BF7AA0400415511 /* AppViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
+		968CCF852BFA0B370084F805 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				962CD1922BF7A78900415511 /* HomeView.swift */,
+				968CCF852BFA0B370084F805 /* HomeViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				962CD1EB2BF7AA0400415511 /* AppViewModel.swift in Sources */,
 				962CD1AA2BF7A94100415511 /* ErrorTracker.swift in Sources */,
 				962CD1E42BF7A9AB00415511 /* APIService.swift in Sources */,
+				968CCF862BFA0B370084F805 /* HomeViewModel.swift in Sources */,
 				962CD1932BF7A78900415511 /* HomeView.swift in Sources */,
 				962CD1D22BF7A9AB00415511 /* BaseError.swift in Sources */,
 				962CD1D32BF7A9AB00415511 /* DecodingError.swift in Sources */,
