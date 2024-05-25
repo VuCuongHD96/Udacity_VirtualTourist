@@ -32,6 +32,10 @@
 		962CD1EA2BF7AA0400415511 /* AppNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CD1E62BF7AA0400415511 /* AppNavigator.swift */; };
 		962CD1EB2BF7AA0400415511 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CD1E72BF7AA0400415511 /* AppViewModel.swift */; };
 		968CCF862BFA0B370084F805 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968CCF852BFA0B370084F805 /* HomeViewModel.swift */; };
+		96F5545A2C01A59600136282 /* HomeNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F554592C01A59600136282 /* HomeNavigator.swift */; };
+		96F5545C2C01A5E100136282 /* AlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F5545B2C01A5E100136282 /* AlbumView.swift */; };
+		96F554602C01F90400136282 /* UdacityNavigationHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F5545D2C01F90400136282 /* UdacityNavigationHeaderView.swift */; };
+		96F554612C01F90400136282 /* UdacityNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F5545E2C01F90400136282 /* UdacityNavigationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +65,10 @@
 		962CD1E62BF7AA0400415511 /* AppNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppNavigator.swift; sourceTree = "<group>"; };
 		962CD1E72BF7AA0400415511 /* AppViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		968CCF852BFA0B370084F805 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		96F554592C01A59600136282 /* HomeNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigator.swift; sourceTree = "<group>"; };
+		96F5545B2C01A5E100136282 /* AlbumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumView.swift; sourceTree = "<group>"; };
+		96F5545D2C01F90400136282 /* UdacityNavigationHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityNavigationHeaderView.swift; sourceTree = "<group>"; };
+		96F5545E2C01F90400136282 /* UdacityNavigationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityNavigationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +219,8 @@
 		962CD1EC2BF7AA0600415511 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				96F5545F2C01F90400136282 /* Navigation */,
+				96F554562C01A13700136282 /* Album */,
 				9679AFD72BF8AB560095303A /* Home */,
 				962CD1E82BF7AA0400415511 /* App */,
 			);
@@ -222,8 +232,26 @@
 			children = (
 				962CD1922BF7A78900415511 /* HomeView.swift */,
 				968CCF852BFA0B370084F805 /* HomeViewModel.swift */,
+				96F554592C01A59600136282 /* HomeNavigator.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		96F554562C01A13700136282 /* Album */ = {
+			isa = PBXGroup;
+			children = (
+				96F5545B2C01A5E100136282 /* AlbumView.swift */,
+			);
+			path = Album;
+			sourceTree = "<group>";
+		};
+		96F5545F2C01F90400136282 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				96F5545D2C01F90400136282 /* UdacityNavigationHeaderView.swift */,
+				96F5545E2C01F90400136282 /* UdacityNavigationView.swift */,
+			);
+			path = Navigation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -297,7 +325,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				962CD1AE2BF7A94100415511 /* ViewModel.swift in Sources */,
+				96F5545A2C01A59600136282 /* HomeNavigator.swift in Sources */,
 				962CD1A92BF7A94100415511 /* Driver.swift in Sources */,
+				96F5545C2C01A5E100136282 /* AlbumView.swift in Sources */,
 				962CD1EB2BF7AA0400415511 /* AppViewModel.swift in Sources */,
 				962CD1AA2BF7A94100415511 /* ErrorTracker.swift in Sources */,
 				962CD1E42BF7A9AB00415511 /* APIService.swift in Sources */,
@@ -313,12 +343,14 @@
 				962CD1B72BF7A98A00415511 /* Screen.swift in Sources */,
 				962CD1D62BF7A9AB00415511 /* ServiceBaseRepository.swift in Sources */,
 				962CD1D72BF7A9AB00415511 /* ServiceBaseRequest.swift in Sources */,
+				96F554612C01F90400136282 /* UdacityNavigationView.swift in Sources */,
 				962CD1EA2BF7AA0400415511 /* AppNavigator.swift in Sources */,
 				962CD1AD2BF7A94100415511 /* Publisher+Unwrap.swift in Sources */,
 				962CD1D42BF7A9AB00415511 /* HTTPMethod.swift in Sources */,
 				962CD1A82BF7A94100415511 /* CancelBag.swift in Sources */,
 				962CD1E92BF7AA0400415511 /* AppDelegate.swift in Sources */,
 				962CD1A72BF7A94100415511 /* ActivityTracker.swift in Sources */,
+				96F554602C01F90400136282 /* UdacityNavigationHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

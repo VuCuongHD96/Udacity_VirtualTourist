@@ -10,7 +10,7 @@ import MapKit
 import Combine
 
 struct HomeViewModel {
-    
+    let navigator: HomeNavigatorType
 }
 
 extension HomeViewModel: ViewModel {
@@ -48,7 +48,7 @@ extension HomeViewModel: ViewModel {
         
         input.annotationAction
             .sink { pinItemViewData in
-                print("--- debug --- pinItemViewData = ", pinItemViewData)
+                navigator.toAlbum()
             }
             .store(in: cancelBag)
         

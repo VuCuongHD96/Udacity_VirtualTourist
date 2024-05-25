@@ -38,10 +38,11 @@ struct HomeView: View {
                 ForEach(output.pinItemViewArray, id: \.id) { pinItem in
                     Annotation("location.name", coordinate: pinItem.coordinate) {
                         Image(systemName: "star.circle")
+                            .resizable()
                             .foregroundStyle(.yellow)
-                            .frame(width: 40, height: 40)
                             .background(.white)
                             .clipShape(.circle)
+                            .frame(width: 40, height: 40)
                             .onTapGesture {
                                 input.annotationAction.send(pinItem)
                             }
@@ -59,6 +60,8 @@ struct HomeView: View {
 }
 
 #Preview {
-    let homeViewModel = HomeViewModel()
+    let navigationController = UINavigationController()
+    let navigator = HomeNavigator(navigationController: navigationController)
+    let homeViewModel = HomeViewModel(navigator: navigator)
     return HomeView(viewModel: homeViewModel)
 }
