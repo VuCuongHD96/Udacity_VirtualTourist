@@ -7,5 +7,6 @@
 import Foundation
 
 struct URLs {
-    private static let baseURL = ""
+    private static let baseURL = "https://www.flickr.com/services/"
+    static let rest = baseURL + "rest/"
 }

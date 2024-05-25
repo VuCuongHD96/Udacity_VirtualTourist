@@ -10,13 +10,22 @@ import SwiftUI
 struct AlbumView: View {
     
     let columns = Array.init(repeating: GridItem(), count: 3)
+    let input: AlbumViewModel.Input
+    @ObservedObject var output: AlbumViewModel.Output
+    let cancelBag = CancelBag()
+    
+    init(viewModel: AlbumViewModel) {
+        let input = AlbumViewModel.Input()
+        output = viewModel.transform(input, cancelBag: cancelBag)
+        self.input = input
+    }
     
     var body: some View {
         UdacityNavigationView {
             HStack {
                 Image("previous")
                     .onTapGesture {
-                        print("--- debug --- tap ALBUM")
+                        input.backAction.send(Void())
                     }
                 Spacer()
                 Text("ALBUM")
@@ -25,7 +34,7 @@ struct AlbumView: View {
                 Spacer()
                 Image("previous")
                     .opacity(0)
-                  
+                
             }
             .frame(height: 40)
             .padding(.horizontal)
@@ -33,10 +42,14 @@ struct AlbumView: View {
             VStack {
                 ScrollView(showsIndicators: false) {
                     LazyVGrid(columns: columns) {
-                        ForEach((1...10), id: \.self) { item in
-                            Rectangle()
-                                .fill(randomColor(from: item))
-                                .frame(height: 180)
+                        ForEach(output.albumItemViewDataArray, id: \.id) { item in
+                            AsyncImage(url: URL(string: item.imageUrlString)) { image in
+                                image
+                                    .resizable()
+                            } placeholder: {
+                                ProgressView()
+                            }
+                            .frame(height: 180)
                         }
                     }
                 }
@@ -54,15 +67,12 @@ struct AlbumView: View {
             }
         }
     }
-    
-    func randomColor(from number: Int) -> Color {
-        let colors: [Color] = [
-            .red, .green, .blue, .orange, .yellow, .pink, .purple, .gray, .black, .brown
-        ]
-        return colors[number % colors.count]
-    }
 }
 
 #Preview {
-    AlbumView()
+    let navigationController = UINavigationController()
+    let useCase = AlbumUseCase()
+    let navigator = AlbumNavigator(navigationController: navigationController)
+    let viewModel = AlbumViewModel(useCase: useCase, navigator: navigator)
+    return AlbumView(viewModel: viewModel)
 }

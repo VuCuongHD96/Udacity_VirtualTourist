@@ -17,7 +17,10 @@ struct HomeNavigator: HomeNavigatorType {
     let navigationController: UINavigationController
     
     func toAlbum() {
-        let albumView = AlbumView()
+        let useCase = AlbumUseCase()
+        let navigator = AlbumNavigator(navigationController: navigationController)
+        let viewModel = AlbumViewModel(useCase: useCase, navigator: navigator)
+        let albumView = AlbumView(viewModel: viewModel)
         let albumScreen = UIHostingController(rootView: albumView)
         navigationController.pushViewController(albumScreen, animated: true)
     }
