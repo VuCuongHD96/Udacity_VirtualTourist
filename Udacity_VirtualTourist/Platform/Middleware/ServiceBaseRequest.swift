@@ -47,7 +47,9 @@ class ServiceBaseRequest {
     init(urlString: String, requestType: HTTPMethod, params: [String: Any]?) {
         self.urlString = urlString
         self.requestType = requestType
-        self.params = params ?? [:]
+        var copyParams = params ?? [:]
+        copyParams["api_key"] = API.key
+        self.params = copyParams
         self.body = nil
     }
     
