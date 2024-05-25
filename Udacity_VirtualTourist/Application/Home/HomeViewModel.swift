@@ -48,7 +48,7 @@ extension HomeViewModel: ViewModel {
         
         input.annotationAction
             .sink { pinItemViewData in
-                navigator.toAlbum()
+                navigator.toAlbum(pinItemViewData: pinItemViewData)
             }
             .store(in: cancelBag)
         
