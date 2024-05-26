@@ -9,12 +9,17 @@ import Foundation
 
 struct AppViewModel {
     
-    let navigator: AppNavigator
+    let navigator: AppNavigatorType
+    let useCase: AppUseCaseType
 }
 
 extension AppViewModel {
     
     func toMainView() {
         navigator.toMainView()
+    }
+    
+    func saveData() -> Observable<Bool> {
+        return useCase.saveData()
     }
 }

@@ -8,6 +8,7 @@
 import Foundation
 import MapKit
 import Combine
+import CoreData
 
 struct HomeViewModel {
     let navigator: HomeNavigatorType
@@ -17,7 +18,7 @@ extension HomeViewModel: ViewModel {
     
     class Input {
         var loadTrigger = Driver.just(Void())
-        var pinLocation = PassthroughSubject<CLLocationCoordinate2D, Never>()
+        var pinAction = PassthroughSubject<CLLocationCoordinate2D, Never>()
         var annotationAction = PassthroughSubject<PinItemViewData, Never>()
     }
     
@@ -37,9 +38,17 @@ extension HomeViewModel: ViewModel {
         .assign(to: \.region, on: output)
         .store(in: cancelBag)
         
-        input.pinLocation
+        input.pinAction
             .map { locationCoordinate in
-                PinItemViewData(coordinate: locationCoordinate)
+                PinEntity(pinID: UUID().uuidString,
+                          locationName: "abc",
+                          latitude: locationCoordinate.latitude,
+                          longitude: locationCoordinate.longitude)
+            }
+            .map { pinEntity in
+                PinItemViewData(id: pinEntity.pinID!,
+                                latitude: pinEntity.latitude,
+                                longitude: pinEntity.longitude)
             }
             .sink { pinItemViewData in
                 output.pinItemViewArray.append(pinItemViewData)
