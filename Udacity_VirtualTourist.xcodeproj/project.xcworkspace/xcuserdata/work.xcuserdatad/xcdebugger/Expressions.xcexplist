@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "closure #3 in HomeViewModel.transform(_:cancelBag:):HomeViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "pinEntity.id.debugDescription">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #2 in closure #1 in HomeView.body.getter:HomeView.swift">
          <PersistentStrings>
             <PersistentString

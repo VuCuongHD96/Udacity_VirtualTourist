@@ -12,6 +12,7 @@ import SwiftUI
 class AppDelegate: NSObject, UIApplicationDelegate {
     
     var window: UIWindow?
+    var appViewModel: AppViewModel!
     
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
@@ -22,7 +23,25 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     private func toMainView() {
         window = UIWindow(frame: UIScreen.main.bounds)
         let navigator = AppNavigator(window: window)
-        let appViewModel = AppViewModel(navigator: navigator)
+        let useCase = AppUseCase()
+        appViewModel = AppViewModel(navigator: navigator, useCase: useCase)
         appViewModel.toMainView()
+    }
+    
+    private func saveData() {
+        _ = appViewModel
+            .saveData()
+    }
+    
+    func applicationWillResignActive(_ application: UIApplication) {
+        saveData()
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        saveData()
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        saveData()
     }
 }

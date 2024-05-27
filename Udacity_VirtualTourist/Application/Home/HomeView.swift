@@ -9,14 +9,12 @@ import SwiftUI
 import MapKit
 
 struct PinItemViewData: Identifiable {
-    let id = UUID().uuidString
-    let coordinate: CLLocationCoordinate2D
-    var latitude: CLLocationDegrees {
-        coordinate.latitude
+    let id: String
+    var coordinate: CLLocationCoordinate2D {
+        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
-    var longitude: CLLocationDegrees {
-        coordinate.longitude
-    }
+    var latitude: CLLocationDegrees
+    var longitude: CLLocationDegrees
 }
 
 struct HomeView: View {
@@ -51,7 +49,7 @@ struct HomeView: View {
             }
             .onTapGesture { position in
                 if let coordinate = proxy.convert(position, from: .local) {
-                    input.pinLocation.send(coordinate)
+                    input.pinAction.send(coordinate)
                 }
             }
             .ignoresSafeArea()
