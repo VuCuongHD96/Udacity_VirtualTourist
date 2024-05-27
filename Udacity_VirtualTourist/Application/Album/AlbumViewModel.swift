@@ -34,7 +34,7 @@ extension AlbumViewModel: ViewModel {
                     .asDriver()
             }
             .map {
-                AlbumItemTranslator.createAlbumItemViewData(from: $0)
+                AlbumItemViewDataTranslator.createAlbumItemViewData(from: $0)
             }
             .assign(to: \.albumItemViewDataArray, on: output)
             .store(in: cancelBag)

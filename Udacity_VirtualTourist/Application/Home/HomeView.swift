@@ -8,15 +8,6 @@
 import SwiftUI
 import MapKit
 
-struct PinItemViewData: Identifiable {
-    let id: String
-    var coordinate: CLLocationCoordinate2D {
-        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-    }
-    var latitude: CLLocationDegrees
-    var longitude: CLLocationDegrees
-}
-
 struct HomeView: View {
     
     var input: HomeViewModel.Input
@@ -34,7 +25,7 @@ struct HomeView: View {
         MapReader { proxy in
             Map(initialPosition: mapCameraPosition) {
                 ForEach(output.pinItemViewArray, id: \.id) { pinItem in
-                    Annotation("location.name", coordinate: pinItem.coordinate) {
+                    Annotation(pinItem.name, coordinate: pinItem.coordinate) {
                         Image(systemName: "star.circle")
                             .resizable()
                             .foregroundStyle(.yellow)
@@ -60,6 +51,7 @@ struct HomeView: View {
 #Preview {
     let navigationController = UINavigationController()
     let navigator = HomeNavigator(navigationController: navigationController)
-    let homeViewModel = HomeViewModel(navigator: navigator)
+    let useCase = HomeUseCase()
+    let homeViewModel = HomeViewModel(navigator: navigator, useCase: useCase)
     return HomeView(viewModel: homeViewModel)
 }
