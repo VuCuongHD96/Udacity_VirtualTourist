@@ -12,12 +12,12 @@ import CoreData
 extension PinEntity {
     
     convenience init(pinID: String,
-                     locationName: String,
+                     name: String,
                      latitude: Double,
                      longitude: Double) {
         self.init(context: CoreDataManager.shared.container.viewContext)
         self.pinID = pinID
-        self.locationName = locationName
+        self.name = name
         self.latitude = latitude
         self.longitude = longitude
     }

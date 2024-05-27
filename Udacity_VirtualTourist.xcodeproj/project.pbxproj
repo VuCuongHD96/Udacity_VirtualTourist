@@ -53,6 +53,8 @@
 		96F554762C02424800136282 /* AlbumItemTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F554752C02424800136282 /* AlbumItemTranslator.swift */; };
 		96F554782C027BBD00136282 /* AlbumNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F554772C027BBD00136282 /* AlbumNavigator.swift */; };
 		96FC2BB62C04BB2200DDB2F6 /* AppUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FC2BB52C04BB2200DDB2F6 /* AppUseCase.swift */; };
+		96FC2BB82C04C7E500DDB2F6 /* GeocoderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FC2BB72C04C7E500DDB2F6 /* GeocoderManager.swift */; };
+		96FC2BBA2C04CABB00DDB2F6 /* HomeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FC2BB92C04CABB00DDB2F6 /* HomeUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -103,6 +105,8 @@
 		96F554752C02424800136282 /* AlbumItemTranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumItemTranslator.swift; sourceTree = "<group>"; };
 		96F554772C027BBD00136282 /* AlbumNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumNavigator.swift; sourceTree = "<group>"; };
 		96FC2BB52C04BB2200DDB2F6 /* AppUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUseCase.swift; sourceTree = "<group>"; };
+		96FC2BB72C04C7E500DDB2F6 /* GeocoderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocoderManager.swift; sourceTree = "<group>"; };
+		96FC2BB92C04CABB00DDB2F6 /* HomeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +177,7 @@
 			children = (
 				962CD1AF2BF7A98A00415511 /* AlertMessage.swift */,
 				962CD1B02BF7A98A00415511 /* DictionaryPrinter.swift */,
+				96FC2BB72C04C7E500DDB2F6 /* GeocoderManager.swift */,
 				962CD1B22BF7A98A00415511 /* Screen.swift */,
 			);
 			path = Util;
@@ -317,6 +322,7 @@
 			children = (
 				962CD1922BF7A78900415511 /* HomeView.swift */,
 				968CCF852BFA0B370084F805 /* HomeViewModel.swift */,
+				96FC2BB92C04CABB00DDB2F6 /* HomeUseCase.swift */,
 				96F554592C01A59600136282 /* HomeNavigator.swift */,
 			);
 			path = Home;
@@ -425,6 +431,7 @@
 			files = (
 				962CD1AE2BF7A94100415511 /* ViewModel.swift in Sources */,
 				96F5545A2C01A59600136282 /* HomeNavigator.swift in Sources */,
+				96FC2BB82C04C7E500DDB2F6 /* GeocoderManager.swift in Sources */,
 				964354AA2C0355A50024014E /* CoreDataBaseRepositoryType.swift in Sources */,
 				964354A82C0355A50024014E /* DataBase.xcdatamodeld in Sources */,
 				962CD1A92BF7A94100415511 /* Driver.swift in Sources */,
@@ -466,6 +473,7 @@
 				962CD1A72BF7A94100415511 /* ActivityTracker.swift in Sources */,
 				96F554602C01F90400136282 /* UdacityNavigationHeaderView.swift in Sources */,
 				96F5546F2C02405900136282 /* AlbumItemViewData.swift in Sources */,
+				96FC2BBA2C04CABB00DDB2F6 /* HomeUseCase.swift in Sources */,
 				96F554742C0240C700136282 /* PhotoEntity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
