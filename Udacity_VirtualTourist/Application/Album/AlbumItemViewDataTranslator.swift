@@ -1,5 +1,5 @@
 //
-//  AlbumItemTranslator.swift
+//  AlbumItemViewDataTranslator.swift
 //  Udacity_VirtualTourist
 //
 //  Created by Work on 25/5/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AlbumItemTranslator {
+struct AlbumItemViewDataTranslator {
     
     static func createAlbumItemViewData(from photoEntityArray: [PhotoEntity]) -> [AlbumItemViewData] {
         return photoEntityArray.map {

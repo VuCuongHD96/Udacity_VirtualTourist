@@ -72,7 +72,7 @@ struct AlbumView: View {
     let navigationController = UINavigationController()
     let useCase = AlbumUseCase()
     let navigator = AlbumNavigator(navigationController: navigationController)
-    let pinItemViewData = PinItemViewData(id: "", latitude: .init(), longitude: .init())
+    let pinItemViewData = PinItemViewData(id: "", latitude: .init(), longitude: .init(), name: "")
     let viewModel = AlbumViewModel(useCase: useCase, navigator: navigator, pinItemViewData: pinItemViewData)
     return AlbumView(viewModel: viewModel)
 }

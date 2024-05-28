@@ -14,7 +14,6 @@ public enum BaseError: Error {
     case redirectionError
     case errorParsing(Error)
     case locationError
-    case loginError
     case internetError
 
     struct Errors {
@@ -26,7 +25,6 @@ public enum BaseError: Error {
         static let serverError = "A server error occurred. Please try again later!"
         static let unofficalError = "An error occurred. Please try again later!"
         static let locationError = "Can not find your location!"
-        static let loginError = "The credentials were incorrect, please check your email or/and your password."
         static let internetError = "The Internet connection appears to be offline."
     }
 
@@ -44,8 +42,6 @@ public enum BaseError: Error {
             return "errorParsing"
         case .locationError:
             return "Location Error"
-        case .loginError:
-            return "Login Error"
         case .internetError:
             return "Internet Error"
         }
@@ -64,8 +60,6 @@ public enum BaseError: Error {
             return movieDecodingError.debugDescription
         case .locationError:
             return Errors.locationError
-        case .loginError:
-            return Errors.loginError
         case .internetError:
             return Errors.internetError
         default:
@@ -77,8 +71,6 @@ public enum BaseError: Error {
         switch HTTPStatusCode(rawValue: httpCode)?.responseType {
         case .redirection?:
             return Errors.redirectionError
-        case .loginError:
-            return Errors.loginError
         case .clientError?:
             return Errors.clientError
         case .serverError?:
