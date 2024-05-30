@@ -16,4 +16,9 @@ struct PinRequest: CoreDataBaseRequestType {
     init() {
         request = T.fetchRequest()
     }
+    
+    func findPin(with pinID: String) {
+        let predicate = NSPredicate(format: "pinID == %@", "\(pinID)")
+        request.predicate = predicate
+    }
 }

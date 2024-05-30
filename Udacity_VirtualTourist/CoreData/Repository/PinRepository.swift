@@ -22,4 +22,10 @@ extension PinRepository: PinRepositoryType {
         let request = PinRequest()
         return coreDataManager.request(input: request)
     }
+    
+    func getPin(pinID: String) -> Observable<[PinEntity]> {
+        let request = PinRequest()
+        request.findPin(with: pinID)
+        return coreDataManager.request(input: request)
+    }
 }

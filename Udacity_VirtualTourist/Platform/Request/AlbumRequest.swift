@@ -9,11 +9,11 @@ import CoreLocation
 
 class AlbumRequest: ServiceBaseRequest {
     
-    init(pinItemViewData: PinItemViewData) {
+    init(pinEntity: PinEntity) {
         let params: [String : Any] = [
             "method" : "flickr.photos.search",
-            "lat": pinItemViewData.latitude,
-            "lon": pinItemViewData.longitude,
+            "lat": pinEntity.latitude,
+            "lon": pinEntity.longitude,
             "per_page": 10,
             "format": "json",
             "nojsoncallback": 1

@@ -82,8 +82,17 @@ extension HomeViewModel: ViewModel {
             .store(in: cancelBag)
         
         input.annotationAction
-            .sink { pinItemViewData in
-                navigator.toAlbum(pinItemViewData: pinItemViewData)
+            .flatMap {
+                useCase.getPin(pinID: $0.id)
+                    .trackError(errorTracker)
+                    .trackActivity(activityTracker)
+                    .asDriver()
+            }
+            .flatMap {
+                $0.publisher
+            }
+            .sink { pinEntity in
+                navigator.toAlbum(pinEntity: pinEntity)
             }
             .store(in: cancelBag)
         
