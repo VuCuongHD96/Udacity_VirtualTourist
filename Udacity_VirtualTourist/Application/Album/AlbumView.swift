@@ -71,7 +71,8 @@ struct AlbumView: View {
 
 #Preview {
     let navigationController = UINavigationController()
-    let useCase = AlbumUseCase()
+    let albumRepository = AlbumServiceRepository(api: .share)
+    let useCase = AlbumUseCase(albumRepository: albumRepository)
     let navigator = AlbumNavigator(navigationController: navigationController)
     let pinEntity = PinEntity(pinID: "", name: "", latitude: 0, longitude: 0)
     let viewModel = AlbumViewModel(useCase: useCase, navigator: navigator, pinEntity: pinEntity)
