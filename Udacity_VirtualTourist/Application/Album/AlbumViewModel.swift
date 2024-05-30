@@ -11,7 +11,7 @@ struct AlbumViewModel {
     
     let useCase: AlbumUseCaseType
     let navigator: AlbumNavigatorType
-    let pinItemViewData: PinItemViewData
+    let pinEntity: PinEntity
 }
 
 extension AlbumViewModel: ViewModel {
@@ -27,15 +27,21 @@ extension AlbumViewModel: ViewModel {
     
     func transform(_ input: Input, cancelBag: CancelBag) -> Output {
         let output = Output()
+        let activityTracker = ActivityTracker(false)
+        let errorTracker = ErrorTracker()
         
-        input.loadTrigger
+        let albumItemViewDataArray = input.loadTrigger
             .flatMap {
-                useCase.fetchAlbumList(pinItemViewData: pinItemViewData)
+                useCase.fetchAlbumList(pinEntity: pinEntity)
+                    .trackActivity(activityTracker)
+                    .trackError(errorTracker)
                     .asDriver()
             }
             .map {
                 AlbumItemViewDataTranslator.createAlbumItemViewData(from: $0)
             }
+        
+        albumItemViewDataArray
             .assign(to: \.albumItemViewDataArray, on: output)
             .store(in: cancelBag)
         

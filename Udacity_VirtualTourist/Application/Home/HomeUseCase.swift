@@ -11,6 +11,7 @@ import CoreLocation
 protocol HomeUseCaseType {
     func getAddressNameFrom(location: CLLocationCoordinate2D) -> Observable<[CLPlacemark]>
     func getPinList() -> Observable<[PinEntity]>
+    func getPin(pinID: String) -> Observable<[PinEntity]>
 }
 
 struct HomeUseCase: HomeUseCaseType {
@@ -24,5 +25,9 @@ struct HomeUseCase: HomeUseCaseType {
     
     func getPinList() -> Observable<[PinEntity]> {
         pinRepository.getPinList()
+    }
+    
+    func getPin(pinID: String) -> Observable<[PinEntity]> {
+        return pinRepository.getPin(pinID: pinID)
     }
 }

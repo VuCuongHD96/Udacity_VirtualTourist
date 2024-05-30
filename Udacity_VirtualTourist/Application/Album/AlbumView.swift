@@ -52,6 +52,7 @@ struct AlbumView: View {
                         }
                     }
                 }
+                .padding(8)
                 Text("New Collection")
                     .font(.title2)
                     .foregroundColor(.white.opacity(0.8))
@@ -72,7 +73,7 @@ struct AlbumView: View {
     let navigationController = UINavigationController()
     let useCase = AlbumUseCase()
     let navigator = AlbumNavigator(navigationController: navigationController)
-    let pinItemViewData = PinItemViewData(id: "", latitude: .init(), longitude: .init(), name: "")
-    let viewModel = AlbumViewModel(useCase: useCase, navigator: navigator, pinItemViewData: pinItemViewData)
+    let pinEntity = PinEntity(pinID: "", name: "", latitude: 0, longitude: 0)
+    let viewModel = AlbumViewModel(useCase: useCase, navigator: navigator, pinEntity: pinEntity)
     return AlbumView(viewModel: viewModel)
 }

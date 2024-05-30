@@ -8,14 +8,14 @@
 import Foundation
 
 protocol AlbumUseCaseType {
-    func fetchAlbumList(pinItemViewData: PinItemViewData) -> Observable<[PhotoEntity]>
+    func fetchAlbumList(pinEntity: PinEntity) -> Observable<[PhotoEntity]>
 }
 
 struct AlbumUseCase: AlbumUseCaseType {
     
     let albumRepository = AlbumRepository(api: .share)
     
-    func fetchAlbumList(pinItemViewData: PinItemViewData) -> Observable<[PhotoEntity]> {
-        return albumRepository.fetchAlbumList(pinItemViewData: pinItemViewData)
+    func fetchAlbumList(pinEntity: PinEntity) -> Observable<[PhotoEntity]> {
+        return albumRepository.fetchAlbumList(pinEntity: pinEntity)
     }
 }

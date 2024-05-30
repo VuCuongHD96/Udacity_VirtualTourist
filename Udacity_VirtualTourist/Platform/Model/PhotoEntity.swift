@@ -17,4 +17,7 @@ struct PhotoEntity: Codable {
     let ispublic: Int
     let isfriend: Int
     let isfamily: Int
+    var urlString: String {
+        "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret).jpg"
+    }
 }
