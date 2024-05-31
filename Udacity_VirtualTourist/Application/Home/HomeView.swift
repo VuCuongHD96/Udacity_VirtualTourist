@@ -38,7 +38,7 @@ struct HomeView: View {
                     }
                 }
             }
-            .onTapGesture { position in
+            .onLongPressGesture(minimumDuration: 0.5) { position in
                 if let coordinate = proxy.convert(position, from: .local) {
                     input.pinAction.send(coordinate)
                 }
