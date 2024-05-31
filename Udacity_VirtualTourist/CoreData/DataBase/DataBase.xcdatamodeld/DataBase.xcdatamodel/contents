@@ -5,6 +5,7 @@
         <relationship name="toPin" maxCount="1" deletionRule="Nullify" destinationEntity="PinEntity" inverseName="toPhotoArray" inverseEntity="PinEntity"/>
     </entity>
     <entity name="PinEntity" representedClassName="PinEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="isAlbumValid" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="latitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="longitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>

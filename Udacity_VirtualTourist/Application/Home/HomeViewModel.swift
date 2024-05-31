@@ -13,6 +13,7 @@ import CoreData
 struct HomeViewModel {
     let navigator: HomeNavigatorType
     let useCase: HomeUseCaseType
+    let photoRepo = AlbumStorageRepository(coreDataManager: .shared)
 }
 
 extension HomeViewModel: ViewModel {
@@ -81,9 +82,9 @@ extension HomeViewModel: ViewModel {
             }
             .store(in: cancelBag)
         
-        input.annotationAction
+        let annotationActionPublisher = input.annotationAction
             .flatMap {
-                useCase.getPin(pinID: $0.id)
+                useCase.getPinArray(pinID: $0.id)
                     .trackError(errorTracker)
                     .trackActivity(activityTracker)
                     .asDriver()
@@ -91,11 +92,31 @@ extension HomeViewModel: ViewModel {
             .flatMap {
                 $0.publisher
             }
-            .sink { pinEntity in
-                navigator.toAlbum(pinEntity: pinEntity)
+        
+        let albumStorageRepositoryPublisher = annotationActionPublisher
+            .filter {
+                $0.isAlbumValid
+            }
+            .map { _ -> AlbumRepositoryType in
+                AlbumStorageRepository(coreDataManager: .shared)
+            }
+        
+        let albumServiceRepositoryPublisher = annotationActionPublisher
+            .filter {
+                !$0.isAlbumValid
+            }
+            .map { _ -> AlbumRepositoryType in
+                AlbumServiceRepository(api: .share)
+            }
+        
+        let albumRepositoryPublisher = Publishers.Merge(albumStorageRepositoryPublisher, albumServiceRepositoryPublisher)
+        
+        Publishers.Zip(annotationActionPublisher, albumRepositoryPublisher)
+            .sink { pinEntity, albumRepository in
+                navigator.toAlbum(pinEntity: pinEntity, albumRepository: albumRepository)
             }
             .store(in: cancelBag)
-        
+
         return output
     }
 }

@@ -20,5 +20,6 @@ extension PinEntity {
         self.name = name
         self.latitude = latitude
         self.longitude = longitude
+        self.isAlbumValid = false
     }
 }

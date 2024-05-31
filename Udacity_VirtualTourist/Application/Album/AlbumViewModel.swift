@@ -40,11 +40,21 @@ extension AlbumViewModel: ViewModel {
             .map {
                 AlbumItemViewDataTranslator.createAlbumItemViewData(from: $0)
             }
+            .share()
         
         albumItemViewDataArray
             .assign(to: \.albumItemViewDataArray, on: output)
             .store(in: cancelBag)
         
+        albumItemViewDataArray
+            .map {
+                $0.isEmpty
+            }
+            .sink {
+                pinEntity.isAlbumValid = !$0
+            }
+            .store(in: cancelBag)
+
         input.backAction
             .sink {
                 navigator.goBack()
