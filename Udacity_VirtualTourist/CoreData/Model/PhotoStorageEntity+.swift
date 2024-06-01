@@ -10,9 +10,10 @@ import CoreData
 
 extension PhotoStorageEntity {
     
-    convenience init(urlString: String, pinEntity: PinEntity) {
+    convenience init(photoID: String, urlString: String, pinEntity: PinEntity) {
         self.init(context: CoreDataManager.shared.container.viewContext)
         self.urlString = urlString
         self.toPin = pinEntity
+        self.photoID = photoID
     }
 }

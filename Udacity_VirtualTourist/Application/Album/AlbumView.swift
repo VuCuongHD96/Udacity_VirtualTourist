@@ -100,11 +100,11 @@ struct AlbumView: View {
         }
         .overlay(alignment: .bottomTrailing) {
             Image("delete")
-                .offset(x: output.isEditing ? 0 :38)
+                .offset(x: output.isEditing ? 0 : 38)
                 .clipped()
                 .animation(.easeInOut, value: output.isEditing)
                 .onTapGesture {
-                    input.deleteAction.send()
+                    input.deleteAction.send(albumItem)
                 }
                 .frame(width: 30, height: 30)
                 .padding(8)

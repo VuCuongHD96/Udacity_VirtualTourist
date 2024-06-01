@@ -10,14 +10,15 @@ import CoreData
 class PhotoStorageRequest: CoreDataBaseRequestType {
     
     typealias T = PhotoStorageEntity
-    var request: NSFetchRequest<T>
+    var request: NSFetchRequest<T> = T.fetchRequest()
     
-    init() {
-        request = T.fetchRequest()
+    init(pinID: String) {
+        let predicate = NSPredicate(format: "toPin.pinID == %@", "\(pinID)")
+        request.predicate = predicate
     }
     
-    func findPhoto(with pinID: String) {
-        let predicate = NSPredicate(format: "toPin.pinID == %@", "\(pinID)")
+    init(photoID: String) {
+        let predicate = NSPredicate(format: "photoID == %@", "\(photoID)")
         request.predicate = predicate
     }
 }

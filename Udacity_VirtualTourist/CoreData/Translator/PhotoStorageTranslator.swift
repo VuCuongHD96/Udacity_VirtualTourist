@@ -12,7 +12,7 @@ struct PhotoStorageTranslator {
     static func createPhotoStorageEntityArray(from photoServiceEntity: [PhotoEntity], 
                                               pinEntity: PinEntity) -> [PhotoStorageEntity] {
         photoServiceEntity.map {
-            .init(urlString: $0.urlString, pinEntity: pinEntity)
+            .init(photoID: $0.id, urlString: $0.urlString, pinEntity: pinEntity)
         }
     }
 }
