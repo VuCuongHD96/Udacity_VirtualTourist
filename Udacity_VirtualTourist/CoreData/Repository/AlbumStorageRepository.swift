@@ -14,9 +14,7 @@ class AlbumStorageRepository: CoreDataBaseRepository {
 extension AlbumStorageRepository: AlbumRepositoryType {
     
     func fetchPhotoList(pinEntity: PinEntity) -> Observable<[PhotoStorageEntity]> {
-        let request = PhotoStorageRequest()
-        request.findPhoto(with: pinEntity.pinID!)
+        let request = PhotoStorageRequest(pinID: pinEntity.pinID!)
         return coreDataManager.request(input: request)
     }
 }
-

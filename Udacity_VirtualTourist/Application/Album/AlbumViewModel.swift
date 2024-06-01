@@ -25,7 +25,7 @@ extension AlbumViewModel: ViewModel {
         var loadTrigger = Driver.just(Void())
         var backAction = PassthroughSubject<Void, Never>()
         var editMode = PassthroughSubject<EditMode, Never>()
-        var deleteAction = PassthroughSubject<Void, Never>()
+        var deleteAction = PassthroughSubject<AlbumItemViewData, Never>()
     }
     
     class Output: ObservableObject {
@@ -71,17 +71,59 @@ extension AlbumViewModel: ViewModel {
         
         input.editMode
             .map {
-                $0 == EditMode.editing
+                $0 == .editing
             }
             .assign(to: \.isEditing, on: output)
             .store(in: cancelBag)
         
-        input.deleteAction
+       let photoItemToDelete = input.deleteAction
+            .flatMap {
+                useCase.fetchPhotoList(albumItemViewData: $0)
+                    .trackError(errorTracker)
+                    .trackActivity(activityTracker)
+                    .asDriver()
+            }
+            .flatMap {
+                $0.publisher
+            }
+            .eraseToAnyPublisher()
+        
+        photoItemToDelete
             .sink {
-                print("--- debug --- delete action")
+                useCase.delete(object: $0)
             }
             .store(in: cancelBag)
         
+        photoItemToDelete
+            .compactMap { photoStorageEntity in
+                output.albumItemViewDataArray.firstIndex {
+                    $0.photoID == photoStorageEntity.photoID
+                }
+            }
+            .sink(receiveValue: {
+                output.albumItemViewDataArray.remove(at: $0)
+            })
+            .store(in: cancelBag)
+        
+        let doneEdit = input.editMode
+            .filter {
+                $0 == .doneEdit
+            }
+            .mapToVoid()
+            
+        Publishers.Merge(input.backAction, doneEdit)
+            .flatMap {
+                useCase.save()
+                    .trackError(errorTracker)
+                    .trackActivity(activityTracker)
+                    .asDriver()
+            }
+            .sink {
+                print("--- debug --- lưu thành công = ", $0)
+            }
+            .store(in: cancelBag)
+
+
         return output
     }
 }

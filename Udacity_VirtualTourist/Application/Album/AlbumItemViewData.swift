@@ -9,5 +9,6 @@ import Foundation
 
 struct AlbumItemViewData: Identifiable {
     var id = UUID().uuidString
+    var photoID: String
     var imageUrlString: String
 }
