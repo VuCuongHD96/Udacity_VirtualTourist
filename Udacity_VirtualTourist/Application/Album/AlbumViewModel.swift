@@ -6,12 +6,15 @@
 //
 
 import Combine
+import Foundation
 
 struct AlbumViewModel {
     
     let useCase: AlbumUseCaseType
     let navigator: AlbumNavigatorType
     let pinEntity: PinEntity
+    let reloadTimer = Timer.publish(every: 0.003, on: .main, in: .default)
+        .autoconnect()
 }
 
 extension AlbumViewModel: ViewModel {
@@ -24,6 +27,7 @@ extension AlbumViewModel: ViewModel {
     struct Input {
         var loadTrigger = Driver.just(Void())
         var backAction = PassthroughSubject<Void, Never>()
+        var reloadAction = PassthroughSubject<Void, Never>()
         var editMode = PassthroughSubject<EditMode, Never>()
         var deleteAction = PassthroughSubject<AlbumItemViewData, Never>()
     }
@@ -31,6 +35,9 @@ extension AlbumViewModel: ViewModel {
     class Output: ObservableObject {
         @Published var albumItemViewDataArray = [AlbumItemViewData]()
         @Published var isEditing = false
+        @Published var isLoading = false
+        @Published var degrees: Double = 0
+        @Published var alertMessage = AlertMessage()
     }
     
     func transform(_ input: Input, cancelBag: CancelBag) -> Output {
@@ -38,7 +45,13 @@ extension AlbumViewModel: ViewModel {
         let activityTracker = ActivityTracker(false)
         let errorTracker = ErrorTracker()
         
-        let albumItemViewDataArray = input.loadTrigger
+        errorTracker.map {
+            AlertMessage(error: $0)
+        }
+        .assign(to: \.alertMessage, on: output)
+        .store(in: cancelBag)
+        
+        input.loadTrigger
             .flatMap {
                 useCase.fetchAlbumList(pinEntity: pinEntity)
                     .trackActivity(activityTracker)
@@ -48,25 +61,46 @@ extension AlbumViewModel: ViewModel {
             .map {
                 AlbumItemViewDataTranslator.createAlbumItemViewData(from: $0)
             }
-            .share()
-        
-        albumItemViewDataArray
             .assign(to: \.albumItemViewDataArray, on: output)
             .store(in: cancelBag)
         
-        albumItemViewDataArray
+        let deleteAllPhotoOfPin = Just(Void())
+            .flatMap { _ in
+                useCase.fetchAlbumList(pinEntity: pinEntity)
+                    .trackActivity(activityTracker)
+                    .trackError(errorTracker)
+                    .asDriver()
+            }
+            .flatMap { photoStorageItem in
+                photoStorageItem.publisher
+            }
             .map {
+                useCase.delete(object: $0)
+            }
+        
+        input.reloadAction
+            .flatMap { 
+                deleteAllPhotoOfPin
+            }
+            .flatMap { _ in
+                useCase.fetchAlbumList(pinEntity: pinEntity)
+                    .trackActivity(activityTracker)
+                    .trackError(errorTracker)
+                    .asDriver()
+            }
+            .filter {
                 $0.isEmpty
             }
-            .sink {
-                pinEntity.isAlbumValid = !$0
+            .flatMap { _ in
+                useCase.fetchPhotoServiceList(pinEntity: pinEntity)
+                    .trackActivity(activityTracker)
+                    .trackError(errorTracker)
+                    .asDriver()
             }
-            .store(in: cancelBag)
-
-        input.backAction
-            .sink {
-                navigator.goBack()
+            .map {
+                AlbumItemViewDataTranslator.createAlbumItemViewData(from: $0)
             }
+            .assign(to: \.albumItemViewDataArray, on: output)
             .store(in: cancelBag)
         
         input.editMode
@@ -76,9 +110,9 @@ extension AlbumViewModel: ViewModel {
             .assign(to: \.isEditing, on: output)
             .store(in: cancelBag)
         
-       let photoItemToDelete = input.deleteAction
+        let photoItemToDelete = input.deleteAction
             .flatMap {
-                useCase.fetchPhotoList(albumItemViewData: $0)
+                useCase.fetchPhotoStorageList(albumItemViewData: $0)
                     .trackError(errorTracker)
                     .trackActivity(activityTracker)
                     .asDriver()
@@ -86,8 +120,7 @@ extension AlbumViewModel: ViewModel {
             .flatMap {
                 $0.publisher
             }
-            .eraseToAnyPublisher()
-        
+
         photoItemToDelete
             .sink {
                 useCase.delete(object: $0)
@@ -105,12 +138,49 @@ extension AlbumViewModel: ViewModel {
             })
             .store(in: cancelBag)
         
+        input.backAction
+            .flatMap {
+                useCase.save()
+                    .trackError(errorTracker)
+                    .trackActivity(activityTracker)
+                    .asDriver()
+            }
+            .filter {
+                $0 == true
+            }
+            .sink { _ in
+                navigator.goBack()
+            }
+            .store(in: cancelBag)
+        
+        activityTracker
+            .filter {
+                $0 == true
+            }
+            .flatMap { _ in
+                reloadTimer
+            }
+            .scan(0) { (accumulatedAngle, _) in
+                return accumulatedAngle + 1
+            }
+            .assign(to: \.degrees, on: output)
+            .store(in: cancelBag)
+        
+        activityTracker
+            .filter {
+                $0 == false
+            }
+            .sink { _ in
+                reloadTimer.upstream.connect().cancel()
+            }
+            .store(in: cancelBag)
+        
         let doneEdit = input.editMode
             .filter {
                 $0 == .doneEdit
             }
             .mapToVoid()
-            
+
         Publishers.Merge(input.backAction, doneEdit)
             .flatMap {
                 useCase.save()
@@ -122,8 +192,7 @@ extension AlbumViewModel: ViewModel {
                 print("--- debug --- lưu thành công = ", $0)
             }
             .store(in: cancelBag)
-
-
+        
         return output
     }
 }
