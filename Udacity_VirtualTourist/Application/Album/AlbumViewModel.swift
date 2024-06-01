@@ -16,13 +16,21 @@ struct AlbumViewModel {
 
 extension AlbumViewModel: ViewModel {
     
+    enum EditMode {
+        case editing
+        case doneEdit
+    }
+    
     struct Input {
         var loadTrigger = Driver.just(Void())
         var backAction = PassthroughSubject<Void, Never>()
+        var editMode = PassthroughSubject<EditMode, Never>()
+        var deleteAction = PassthroughSubject<Void, Never>()
     }
     
     class Output: ObservableObject {
         @Published var albumItemViewDataArray = [AlbumItemViewData]()
+        @Published var isEditing = false
     }
     
     func transform(_ input: Input, cancelBag: CancelBag) -> Output {
@@ -58,6 +66,19 @@ extension AlbumViewModel: ViewModel {
         input.backAction
             .sink {
                 navigator.goBack()
+            }
+            .store(in: cancelBag)
+        
+        input.editMode
+            .map {
+                $0 == EditMode.editing
+            }
+            .assign(to: \.isEditing, on: output)
+            .store(in: cancelBag)
+        
+        input.deleteAction
+            .sink {
+                print("--- debug --- delete action")
             }
             .store(in: cancelBag)
         
