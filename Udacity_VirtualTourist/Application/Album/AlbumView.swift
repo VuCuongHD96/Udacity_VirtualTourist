@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct AlbumView: View {
     
@@ -33,8 +34,8 @@ struct AlbumView: View {
                     .fontWeight(.medium)
                 Spacer()
                 Image("refresh")
-//                    .rotationEffect(.degrees(output.degrees))
-//                    .allowsHitTesting(!output.isLoading)
+                    .rotationEffect(.degrees(output.degrees))
+                    .allowsHitTesting(!output.isLoading)
                     .onTapGesture {
                         input.reloadAction.send()
                     }
@@ -43,6 +44,18 @@ struct AlbumView: View {
             .padding(.horizontal)
         } bodyContent: {
             VStack {
+                let mapCameraPosition = MapCameraPosition.region(output.region)
+                Map(initialPosition: mapCameraPosition) {
+                    Annotation(output.pinItem.name, coordinate: output.pinItem.coordinate) {
+                        Image(systemName: "star.circle")
+                            .resizable()
+                            .foregroundStyle(.yellow)
+                            .background(.white)
+                            .clipShape(.circle)
+                            .frame(width: 40, height: 40)
+                    }
+                }
+                .frame(height: 150)
                 ScrollView(showsIndicators: false) {
                     LazyVGrid(columns: columns) {
                         ForEach(output.albumItemViewDataArray, id: \.id) { item in
@@ -113,7 +126,7 @@ struct AlbumView: View {
                 }
                 .frame(width: 30, height: 30)
                 .padding(8)
-//                .allowsHitTesting(output.isEditing)
+                .allowsHitTesting(output.isEditing)
         }
     }
 }

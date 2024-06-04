@@ -6,7 +6,7 @@
 //
 
 import Combine
-import Foundation
+import MapKit
 
 struct AlbumViewModel {
     
@@ -38,6 +38,8 @@ extension AlbumViewModel: ViewModel {
         @Published var isLoading = false
         @Published var degrees: Double = 0
         @Published var alertMessage = AlertMessage()
+        @Published var region: MKCoordinateRegion = .init()
+        @Published var pinItem = PinItemViewData()
     }
     
     func transform(_ input: Input, cancelBag: CancelBag) -> Output {
@@ -50,6 +52,22 @@ extension AlbumViewModel: ViewModel {
         }
         .assign(to: \.alertMessage, on: output)
         .store(in: cancelBag)
+        
+        input.loadTrigger
+            .map { _ in
+                let coordinate = CLLocationCoordinate2D(latitude: pinEntity.latitude, longitude: pinEntity.longitude)
+                let coordinateSpan = MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1)
+                return MKCoordinateRegion(center: coordinate, span: coordinateSpan)
+            }
+            .assign(to: \.region, on: output)
+            .store(in: cancelBag)
+        
+        Just(pinEntity)
+            .map {
+                PinItemViewDataTranslator.createPinItemViewData(pinEntity: $0)
+            }
+            .assign(to: \.pinItem, on: output)
+            .store(in: cancelBag)
         
         input.loadTrigger
             .flatMap {
