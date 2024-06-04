@@ -16,4 +16,15 @@ struct PinItemViewData: Identifiable {
     var latitude: CLLocationDegrees
     var longitude: CLLocationDegrees
     var name: String
+    
+    init(id: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees, name: String) {
+        self.id = id
+        self.latitude = latitude
+        self.longitude = longitude
+        self.name = name
+    }
+    
+    init() {
+        self.init(id: "", latitude: 0, longitude: 0, name: "")
+    }
 }
