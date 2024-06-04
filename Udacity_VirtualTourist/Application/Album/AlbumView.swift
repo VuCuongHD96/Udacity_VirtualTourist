@@ -25,15 +25,19 @@ struct AlbumView: View {
             HStack {
                 Image("previous")
                     .onTapGesture {
-                        input.backAction.send(Void())
+                        input.backAction.send()
                     }
                 Spacer()
                 Text("ALBUM")
                     .font(.title2)
                     .fontWeight(.medium)
                 Spacer()
-                Image("previous")
-                    .opacity(0)
+                Image("refresh")
+//                    .rotationEffect(.degrees(output.degrees))
+//                    .allowsHitTesting(!output.isLoading)
+                    .onTapGesture {
+                        input.reloadAction.send()
+                    }
             }
             .frame(height: 40)
             .padding(.horizontal)
@@ -47,6 +51,7 @@ struct AlbumView: View {
                                 .frame(height: 180)
                         }
                     }
+                    .animation(.easeInOut, value: output.albumItemViewDataArray)
                 }
                 .padding(8)
                 Spacer()
@@ -108,6 +113,7 @@ struct AlbumView: View {
                 }
                 .frame(width: 30, height: 30)
                 .padding(8)
+//                .allowsHitTesting(output.isEditing)
         }
     }
 }

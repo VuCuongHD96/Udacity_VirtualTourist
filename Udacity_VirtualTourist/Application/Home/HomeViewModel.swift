@@ -95,7 +95,7 @@ extension HomeViewModel: ViewModel {
         
         let albumStorageRepositoryPublisher = annotationActionPublisher
             .filter {
-                $0.isAlbumValid
+                $0.toPhotoArray?.count != 0
             }
             .map { _ -> AlbumRepositoryType in
                 AlbumStorageRepository(coreDataManager: .shared)
@@ -103,7 +103,7 @@ extension HomeViewModel: ViewModel {
         
         let albumServiceRepositoryPublisher = annotationActionPublisher
             .filter {
-                !$0.isAlbumValid
+                $0.toPhotoArray?.count == 0
             }
             .map { _ -> AlbumRepositoryType in
                 AlbumServiceRepository(api: .share)
