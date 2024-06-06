@@ -9,10 +9,12 @@ import Foundation
 
 struct PhotoStorageTranslator {
     
-    static func createPhotoStorageEntityArray(from photoServiceEntity: [PhotoEntity], 
+    static func createPhotoStorageEntityArray(from photoServiceEntity: [PhotoEntity],
                                               pinEntity: PinEntity) -> [PhotoStorageEntity] {
         photoServiceEntity.map {
-            .init(photoID: $0.id, urlString: $0.urlString, pinEntity: pinEntity)
+            let photoURL = URL(string: $0.urlString)
+            let photoData = try? Data(contentsOf: photoURL!)
+            return .init(photoID: $0.id, pinEntity: pinEntity, photoData: photoData)
         }
     }
 }

@@ -12,6 +12,7 @@ protocol AlbumUseCaseType {
     func fetchAlbumList(pinEntity: PinEntity) -> Observable<[PhotoStorageEntity]>
     func fetchPhotoStorageList(albumItemViewData: AlbumItemViewData) -> Observable<[PhotoStorageEntity]>
     func fetchPhotoServiceList(pinEntity: PinEntity) -> Observable<[PhotoStorageEntity]>
+    func fetchPhotoStorageList(pinEntity: PinEntity) -> Observable<[PhotoStorageEntity]>
     func delete(object: NSManagedObject)
     func save() -> Observable<Bool>
 }
@@ -41,5 +42,9 @@ struct AlbumUseCase: AlbumUseCaseType {
     
     func fetchPhotoServiceList(pinEntity: PinEntity) -> Observable<[PhotoStorageEntity]> {
         albumServiceRepository.fetchPhotoList(pinEntity: pinEntity)
+    }
+
+    func fetchPhotoStorageList(pinEntity: PinEntity) -> Observable<[PhotoStorageEntity]> {
+        albumStorageRepository.fetchPhotoList(pinEntity: pinEntity)
     }
 }

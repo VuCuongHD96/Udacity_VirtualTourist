@@ -32,6 +32,9 @@ struct AlbumView: View {
                 Text("ALBUM")
                     .font(.title2)
                     .fontWeight(.medium)
+                    .onTapGesture {
+                        input.reloadAction.send(completion: .finished)
+                    }
                 Spacer()
                 Image("refresh")
                     .rotationEffect(.degrees(output.degrees))
@@ -62,71 +65,46 @@ struct AlbumView: View {
                             imageView(albumItem: item)
                                 .cornerRadius(8)
                                 .frame(height: 180)
+                                .onTapGesture {
+                                    input.deleteAction.send(item)
+                                }
                         }
                     }
                     .animation(.easeInOut, value: output.albumItemViewDataArray)
                 }
                 .padding(8)
-                Spacer()
-                HStack(spacing: 0) {
-                    if output.isEditing {
-                        doneEditingView
-                    } else {
-                        editView
-                    }
-                }
                 .animation(.easeOut, value: output.isEditing)
-                .frame(height: 40)
             }
         }
-    }
-    
-    private var editView: some View {
-        Text("Edit Mode")
-            .font(.title2)
-            .foregroundColor(.white.opacity(0.8))
-            .fontWeight(.bold)
-            .ignoresSafeArea(edges: .bottom)
-            .frame(maxWidth: .infinity)
-            .padding()
-            .background(Color.red.opacity(0.8))
-            .onTapGesture {
-                input.editMode.send(.editing)
-            }
-    }
-    
-    private var doneEditingView: some View {
-        Text("Done Editing")
-            .font(.title2)
-            .foregroundColor(.white.opacity(0.8))
-            .fontWeight(.bold)
-            .ignoresSafeArea(edges: .bottom)
-            .frame(maxWidth: .infinity)
-            .padding()
-            .background(Color.blue.opacity(0.8))
-            .onTapGesture {
-                input.editMode.send(.doneEdit)
-            }
+        .alert(isPresented: $output.alertMessage.isShowing) {
+            Alert(title: Text(output.alertMessage.title),
+                  message: Text(output.alertMessage.message))
+        }
     }
     
     private func imageView(albumItem: AlbumItemViewData) -> some View {
-        AsyncImage(url: URL(string: albumItem.imageUrlString)) { image in
-            image
-                .resizable()
-        } placeholder: {
-            ProgressView()
-        }
-        .overlay(alignment: .bottomTrailing) {
-            Image("delete")
-                .offset(x: output.isEditing ? 0 : 38)
-                .clipped()
-                .animation(.easeInOut, value: output.isEditing)
-                .onTapGesture {
-                    input.deleteAction.send(albumItem)
-                }
-                .frame(width: 30, height: 30)
-                .padding(8)
-                .allowsHitTesting(output.isEditing)
+        if let photoData = albumItem.photoData,
+           let uiImage = UIImage(data: photoData) {
+            AnyView(
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .overlay(alignment: .bottomTrailing) {
+                        Image("delete")
+                            .offset(x: output.isEditing ? 0 : 38)
+                            .clipped()
+                            .animation(.easeInOut, value: output.isEditing)
+                            .onTapGesture {
+                                input.deleteAction.send(albumItem)
+                            }
+                            .frame(width: 30, height: 30)
+                            .padding(8)
+                            .allowsHitTesting(output.isEditing)
+                    }
+            )
+        } else {
+            AnyView(
+                ProgressView()
+            )
         }
     }
 }

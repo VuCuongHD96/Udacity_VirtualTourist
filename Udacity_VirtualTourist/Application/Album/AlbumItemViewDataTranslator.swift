@@ -11,7 +11,7 @@ struct AlbumItemViewDataTranslator {
     
     static func createAlbumItemViewData(from photoStorageEntityArray: [PhotoStorageEntity]) -> [AlbumItemViewData] {
         return photoStorageEntityArray.map {
-            return .init(photoID: $0.photoID!, imageUrlString: $0.urlString!)
+            return .init(id: UUID().uuidString, photoID: $0.photoID!, photoData: $0.photoData)
         }
     }
 }

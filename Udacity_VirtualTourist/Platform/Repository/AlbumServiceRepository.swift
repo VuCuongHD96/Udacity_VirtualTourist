@@ -18,9 +18,11 @@ extension AlbumServiceRepository: AlbumRepositoryType {
             .map { (data: PhotosResponse) in
                 return data.photos.photo
             }
+            .receive(on: DispatchQueue.global(qos: .background))
             .map {
                 PhotoStorageTranslator.createPhotoStorageEntityArray(from: $0, pinEntity: pinEntity)
             }
+            .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
 }
