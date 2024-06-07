@@ -19,16 +19,10 @@ struct AlbumViewModel {
 
 extension AlbumViewModel: ViewModel {
     
-    enum EditMode {
-        case editing
-        case doneEdit
-    }
-    
     struct Input {
         var loadTrigger = Driver.just(Void())
         var backAction = PassthroughSubject<Void, Never>()
         var reloadAction = PassthroughSubject<Void, Never>()
-        var editMode = PassthroughSubject<EditMode, Never>()
         var deleteAction = PassthroughSubject<AlbumItemViewData, Never>()
     }
     
@@ -61,6 +55,14 @@ extension AlbumViewModel: ViewModel {
             }
             .assign(to: \.region, on: output)
             .store(in: cancelBag)
+
+        Array(1...9).publisher
+            .map { _ in
+                AlbumItemViewData(id: UUID().uuidString)
+            }
+            .collect()
+            .assign(to: \.albumItemViewDataArray, on: output)
+            .store(in: cancelBag)
         
         Just(pinEntity)
             .map {
@@ -82,35 +84,25 @@ extension AlbumViewModel: ViewModel {
             .assign(to: \.albumItemViewDataArray, on: output)
             .store(in: cancelBag)
         
-        let deleteAllPhotoOfPin = Just(Void())
+        input.reloadAction
             .flatMap { _ in
-                useCase.fetchAlbumList(pinEntity: pinEntity)
+                useCase.fetchPhotoStorageList(pinEntity: pinEntity)
                     .trackActivity(activityTracker)
                     .trackError(errorTracker)
                     .asDriver()
             }
-            .flatMap { photoStorageItem in
-                photoStorageItem.publisher
+            .flatMap {
+                $0.publisher
             }
-            .map {
+            .sink(receiveValue: {
                 useCase.delete(object: $0)
-            }
+            })
+            .store(in: cancelBag)
         
         input.reloadAction
-            .flatMap { 
-                deleteAllPhotoOfPin
-            }
-            .flatMap { _ in
-                useCase.fetchAlbumList(pinEntity: pinEntity)
-                    .trackActivity(activityTracker)
-                    .trackError(errorTracker)
-                    .asDriver()
-            }
-            .filter {
-                $0.isEmpty
-            }
             .flatMap { _ in
                 useCase.fetchPhotoServiceList(pinEntity: pinEntity)
+                    .retry(3)
                     .trackActivity(activityTracker)
                     .trackError(errorTracker)
                     .asDriver()
@@ -119,13 +111,6 @@ extension AlbumViewModel: ViewModel {
                 AlbumItemViewDataTranslator.createAlbumItemViewData(from: $0)
             }
             .assign(to: \.albumItemViewDataArray, on: output)
-            .store(in: cancelBag)
-        
-        input.editMode
-            .map {
-                $0 == .editing
-            }
-            .assign(to: \.isEditing, on: output)
             .store(in: cancelBag)
         
         let photoItemToDelete = input.deleteAction
@@ -138,7 +123,7 @@ extension AlbumViewModel: ViewModel {
             .flatMap {
                 $0.publisher
             }
-
+        
         photoItemToDelete
             .sink {
                 useCase.delete(object: $0)
@@ -193,13 +178,7 @@ extension AlbumViewModel: ViewModel {
             }
             .store(in: cancelBag)
         
-        let doneEdit = input.editMode
-            .filter {
-                $0 == .doneEdit
-            }
-            .mapToVoid()
-
-        Publishers.Merge(input.backAction, doneEdit)
+        input.backAction
             .flatMap {
                 useCase.save()
                     .trackError(errorTracker)
