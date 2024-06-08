@@ -16,7 +16,8 @@ class AlbumRequest: ServiceBaseRequest {
             "lon": pinEntity.longitude,
             "per_page": 10,
             "format": "json",
-            "nojsoncallback": 1
+            "nojsoncallback": 1,
+            "page": Int.random(in: 1...10)
         ]
         super.init(urlString: URLs.rest, requestType: .get, params: params)
     }
