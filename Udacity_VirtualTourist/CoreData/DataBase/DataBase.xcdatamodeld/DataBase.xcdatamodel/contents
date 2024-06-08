@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22757" systemVersion="23F79" minimumToolsVersion="Xcode 13.0" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
     <entity name="PhotoStorageEntity" representedClassName="PhotoStorageEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="photoData" attributeType="Binary"/>
+        <attribute name="photoData" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="photoID" attributeType="String"/>
         <relationship name="toPin" maxCount="1" deletionRule="Nullify" destinationEntity="PinEntity" inverseName="toPhotoArray" inverseEntity="PinEntity"/>
     </entity>
